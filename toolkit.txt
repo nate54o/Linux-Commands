@@ -2,7 +2,7 @@ swaks - SMTP transaction tester
 flip - convert text file line endings between Unix and DOS formats
 mtr - ping and traceroute glued together
 xxd - make a hexdump or do the reverse
-watch - execute a program periodically, showing output fullscreen
+watch - execute a program periodically, sh owing output fullscreen
 netcat - TCP/IP swiss army knife
 fuser - show which PIDs are using a file (executable, log, etc)
 stat - shows extended inode/file information, basically a userland stat()
