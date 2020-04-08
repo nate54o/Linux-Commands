@@ -79,7 +79,7 @@ cat /etc/passwd | awk -F: '{print $5}'
 also to grep a file with a space/tab as the delimiter try:
 
 cat foo2 |awk -F' ' '{print $5}'
-cat blah | cut -d' ' -f3 
+cat blah | cut -d' ' -f3
 
 # say you wanna delete a bunch of files, but get argument list too long, for example im trying to delete 30k lock files do the following command:
 
@@ -113,8 +113,8 @@ rsync -av -e "ssh -C" product_list.* zeroadmin@db01.foo.ml.COMPANYXYZ.com:/home/
 # use the below command to concatenate a log file
 /etc/init.d/sysklogd stop && echo '' >/var/log/[Log file name] && /etc/init.d/sysklogd start
 
-# ex: The below command was used to concatenate the user.log file. 
-/etc/init.d/sysklogd stop && echo '' >/var/log/user.log && /etc/init.d/sysklogd 
+# ex: The below command was used to concatenate the user.log file.
+/etc/init.d/sysklogd stop && echo '' >/var/log/user.log && /etc/init.d/sysklogd
 start
 
 
@@ -133,7 +133,7 @@ john
 ed
 joe
 
-file 2 = /etc/passwd so 
+file 2 = /etc/passwd so
 
 grep -f file1(with the names 1 per line) file2(/etc/passwd) would yield each of the /etc/passwd lines that have john/ed/joe as users.. the ENTIRE line
 
@@ -166,7 +166,7 @@ etc
 
 and you have file2 like
 
-bar1 
+bar1
 bar2
 bar3
 etc
@@ -260,7 +260,7 @@ backup4:/# ps ax -o cmd |grep rsync|grep daily.0|sort|uniq|wc -l
 
 ==========================
 
-rename filenames with spaces to _ 
+rename filenames with spaces to _
 
 rename 's/ /_/g' *
 
@@ -274,7 +274,7 @@ rename 'y/A-Z/a-z/' *
 
 set all contents of a file to lowercase:
 
-cat mixedcasefile | tr "[:upper:]" "[:lower:]" > lowercasefile 
+cat mixedcasefile | tr "[:upper:]" "[:lower:]" > lowercasefile
 
 ================================
 
@@ -284,7 +284,7 @@ Foo1
 Foo2
 Foo3
 Foo4
-Foo5 
+Foo5
 
 to
 
@@ -349,7 +349,7 @@ krypton0:/www# find . -type f -size +100000k -exec ls -lh {} \; | awk '{print $9
 
 so say you have a file with a domain 1 per line, you want to use the COMPANYXYZ "add vhost users" tool to bulk add all the ftp accts:
 
-foo = the file with each domain to add 1 per line, 
+foo = the file with each domain to add 1 per line,
 somestring = the password that'll be for each domain
 
 perl -pi -e 'chomp; $_ = "$_\tsomestring\t$_\n";' foo
@@ -539,13 +539,13 @@ perl -pi -e 's/ +/\t/g'
 
 test config of each rsnapshot conf file in /etc/rsnapshot/hosts
 
-for i in `ls /etc/rsnapshot/hosts/`; do rsnapshot -c $i configtest; done 
+for i in `ls /etc/rsnapshot/hosts/`; do rsnapshot -c $i configtest; done
 
 =======================
 
 awesome use of Awk,
 
-if you have a file with domains 1 per line, and want to compare against a vhosts conf file and grab out servername, serveralias, and docroot for each of those domains, do the following, this also prints a blank line between each set of 3 (note there can be NO space before each line use, 
+if you have a file with domains 1 per line, and want to compare against a vhosts conf file and grab out servername, serveralias, and docroot for each of those domains, do the following, this also prints a blank line between each set of 3 (note there can be NO space before each line use,
 :%s/^\s\s*//g to remove any white spaces before each line)
 
 awk 'NR==FNR{a[$1];next}/^<VirtualHost/{ok=0}/ServerName/{name=$0;if($2 in a)ok=1}/ServerAlias/{alias=$0}/DocumentRoot/{root=$0}/^<\/VirtualHost/{if(ok){print sep name;print alias;print root;sep=ORS}}' sitelist vhost.conf > Sites-Aliases-DocRoots-to-migrate
@@ -557,7 +557,7 @@ this command takes a file (OldServerPath) and a file (NewServerPath) reads them 
 paste OldServerPath NewServerPath | while read old new; do rsync -avn $old www01.bostonwebcompany.ml.COMPANYXYZ.com:$new; done
 
 =======================
- 
+
 clean way to large files
 
 find . -type f -size +200M -printf "%s %f\n" |sort -n
@@ -666,7 +666,7 @@ perl -e 'local $/; ($a = <>) =~ s/\s+/, /g;print $a' $file-with-serverlist
 
 cat access.log | perl -pi -e 's/\s.+//' | sort | uniq -c | sort -nr | head
 
-cat access_log | awk '{print $1}' |  sort | uniq -c | sort -n | tail  
+cat access_log | awk '{print $1}' |  sort | uniq -c | sort -n | tail
 
 will generally give you the DoSing spider address
 
@@ -920,7 +920,7 @@ for file in $(find . -type f -name "*.log"); do if [ "$(grep 'www03.rxmuscle' $f
 ======
 
 # check hostname on all the ssl sites that have $site.conf
-for i in `ls /etc/xenon/apache2/ssl-hosts/`; do b=${i%%.conf}; host -t a $b; done 
+for i in `ls /etc/xenon/apache2/ssl-hosts/`; do b=${i%%.conf}; host -t a $b; done
 
 ======
 
@@ -948,7 +948,7 @@ net.ipv4.tcp_tw_reuse = 1
 ======
 
 Look for who is connected to apache
-netstat -anpt|grep apache2|grep ESTABLISHED|cut -b45-60|cut -d':' -f1|sort -rn|uniq -c 
+netstat -anpt|grep apache2|grep ESTABLISHED|cut -b45-60|cut -d':' -f1|sort -rn|uniq -c
 
 
 ======
@@ -968,7 +968,7 @@ utility01 nfl-extreme # for i in `cat nflswitches`; do echo $i && ssh -l admin $
 
 Create multiple similar directory structures:
 
-mkdir /path/{myfolder1,myfolder2}/{mysub1,mysub2} 
+mkdir /path/{myfolder1,myfolder2}/{mysub1,mysub2}
     will make myfolder, myfolder1/mysub1, myfolder1/mysub2, myfolder2, myfolder2/mysub1, myfolder2/mysub2
 
 ======
@@ -1018,3 +1018,20 @@ USR=$(pwd|cut -d/ -f4) && USRUID=$(grep $USR /etc/passwd | cut -d: -f3) && x=1; 
 
 
 ==============
+
+HELPFUL USER commands
+
+Find out the recent users logged in
+last -s YYYY-MM-DD
+YYYYMMDDhhmmss
+     YYYY-MM-DD hh:mm:ss
+     YYYY-MM-DD hh:mm      (seconds will be set to 00)
+     YYYY-MM-DD            (time will be set to 00:00:00)
+     hh:mm:ss              (date will be set to today)
+     hh:mm                 (date will be set to today, seconds to 00)
+     now
+     yesterday             (time is set to 00:00:00)
+     today                 (time is set to 00:00:00)
+     tomorrow              (time is set to 00:00:00)
+     +5min
+     -5days
